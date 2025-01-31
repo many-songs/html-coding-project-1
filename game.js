@@ -1,1 +1,1 @@
-canvas=getElementById("canvas")
+let canvas=getElementById("canvas")
