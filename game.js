@@ -1,0 +1,1 @@
+canvas=getElementById("canvas")
