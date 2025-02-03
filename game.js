@@ -63,7 +63,7 @@ function testColision(pos) {
     let distY = ballPosition[1]-(testY)
     let distance = Math.sqrt((distX*distX)+(distY*distY))
     if (distance <= ballRadius) {
-        if (!(left||right)){
+        /*if (!(left||right)){
             ballVelocity[1]*=-1
         } else if (!(up||down)) {
             ballVelocity[0]*=-1
@@ -79,19 +79,20 @@ function testColision(pos) {
 function updateBall() {
     ballPosition[0]+=ballVelocity[0]
     ballPosition[1]+=ballVelocity[1]
-    if (ballPosition[0]-ballRadius[0]<0) {
+    console.log(ballPosition)
+    if (ballPosition[0]-ballRadius<0) {
         ballVelocity[0]*=-1
         console.log("I wall")
     }
-    if (ballPosition[0]+ballRadius[0]>canvasWidth) {
+    if (ballPosition[0]+ballRadius>canvasWidth) {
         ballVelocity[0]*=-1
         console.log("I wall")
     }
-    if (ballPosition[1]-ballRadius[1]<0) {
+    if (ballPosition[1]-ballRadius<0) {
         ballVelocity[1]*=-1
         console.log("I wall")
     }
-    if (ballPosition[1]-ballRadius[1]>canvasHeight) {
+    if (ballPosition[1]+ballRadius>canvasHeight) {
         ballVelocity[1]*=-1
         console.log("I wall")
     }
