@@ -10,7 +10,12 @@
     <p>it's pretty routine for me.</p>
     
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Cloud_types.svg" alt="a random image from wikepedia about clouds"/>
-    <canvas id="canvas">something went wrong</canvas>
-    <script src="game.js"></script>
+    <canvas id="canvas" height="200" width="200">something went wrong</canvas>
+    <script>
+        let canvas=getElementById("canvas")
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle="blue"
+        ctx.fillRect(2,2,50,50)
+    </script>
 </body>
 </html>
