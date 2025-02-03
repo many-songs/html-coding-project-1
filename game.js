@@ -23,6 +23,30 @@ const paddleWidth = canvasWidth/4
 const paddleHeight = 10
 let paddlePos = (canvasWidth/2)-(paddleWidth/2)
 
+let moveRight = false
+let moveLeft = false
+
+document.addEventListener("keydown",(e) =>keyIsPressed(e))
+document.addEventListener("keyup",(e)=>keyIsReleased(e))
+function keyIsPressed(e) {
+    let key = e.key
+    console.log(key)
+    if (key=="ArrowLeft"||key=="a") {
+        moveLeft=true
+    }
+    if (key=="ArrowRight"||key=="d") {
+        moveRight=true
+    }
+}
+function keyIsReleased(e) {
+    let key = e.key
+    if (key=="ArrowLeft"||key=="a") {
+        moveLeft=false
+    }
+    if (key=="ArrowRight"||key=="d") {
+        moveRight=false
+    }
+}
 function drawBlocks() {
     let doin = false
     let colide = false
@@ -102,19 +126,18 @@ function updateBall() {
     
     if (ballPosition[0]-ballRadius<0) {
         ballVelocity[0]*=-1
-        console.log("I wall")
+
     }
     if (ballPosition[0]+ballRadius>canvasWidth) {
         ballVelocity[0]*=-1
-        console.log("I wall")
+
     }
     if (ballPosition[1]-ballRadius<0) {
         ballVelocity[1]*=-1
-        console.log("I wall")
+
     }
-    if (ballPosition[1]+ballRadius>canvasHeight) {
+    if (ballPosition[1]+ballRadius>canvasHeight-paddleHeight&&(ballPosition<paddlePos+paddleWidth&&ballPosition>paddlePos)) {
         ballVelocity[1]*=-1
-        console.log("I wall")
     }
 }
 function drawBall() {
@@ -127,12 +150,21 @@ function drawPaddle() {
     ctx.fillStyle="green"
     ctx.fillRect(paddlePos,canvasHeight-paddleHeight,paddleWidth,paddleHeight)
 }
+function updatePaddle() {
+    if (moveLeft&&(paddlePos>0)) {
+        paddlePos-=3
+    }
+    if (moveRight&&(paddlePos+paddleWidth<canvasWidth)) {
+        paddlePos+=3
+    }
+}
 function main() {
     ctx.clearRect(0,0,canvasWidth,canvasHeight)
     drawBlocks()
     updateBall()
     drawBall()
     drawPaddle()
+    updatePaddle()
 
     requestAnimationFrame(main)
 }
