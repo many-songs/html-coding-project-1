@@ -22,13 +22,14 @@ function drawBlocks() {
         for (let y = 0; y < blocksTall; y++) {
             const block = row[y];
             const blockPosition = [blocksWidth*x+leftOffset, blocksHeight*y+topOffset]
-            if (block==1){
+            if (blocks[x][y]==1){
                 ctx.fillStyle="red"
                 ctx.strokeStyle="black"
                 ctx.lineWidth=1
                 ctx.fillRect(blockPosition[0],blockPosition[1],blocksWidth,blocksHeight)
                 ctx.strokeRect(blockPosition[0],blockPosition[1],blocksWidth,blocksHeight)
                 if (testColision(blockPosition)==true) {
+                    //console.log("does this really happen 10 times?")
                     blocks[x][y]=0
                 }
             }
@@ -62,12 +63,16 @@ function testColision(pos) {
     let distX = ballPosition[0]-(testX)
     let distY = ballPosition[1]-(testY)
     let distance = Math.sqrt((distX*distX)+(distY*distY))
+    let donee = false
     if (distance <= ballRadius) {
-        /*if (!(left||right)){
+        if (!(left||right)){
             ballVelocity[1]*=-1
-        } else if (!(up||down)) {
+            donee = true
+        }
+        if (!(up||down)) {
             ballVelocity[0]*=-1
-        } else {
+            donee=true
+        } if (!donee) {
             ballVelocity[0]*=-1
             ballVelocity[1]*=-1
         }
@@ -79,7 +84,7 @@ function testColision(pos) {
 function updateBall() {
     ballPosition[0]+=ballVelocity[0]
     ballPosition[1]+=ballVelocity[1]
-    console.log(ballPosition)
+    
     if (ballPosition[0]-ballRadius<0) {
         ballVelocity[0]*=-1
         console.log("I wall")
