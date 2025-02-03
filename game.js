@@ -2,21 +2,26 @@ let canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d");
 let  canvasHeight = canvas.getAttribute("height")
 let canvasWidth = canvas.getAttribute("width")
+
 let topOffset = 20
 let leftOffset = 30
 let bottomOffset = 70
 let rightOffset = 30
+
 let blocksWide = 10
 let blocksTall = 10
 let blocksWidth = (canvasWidth - leftOffset - rightOffset)/blocksWide
 let blocksHeight = (canvasHeight - topOffset - bottomOffset)/blocksTall
+
 let blocks = new Array(blocksWide).fill().map(x => new Array(blocksTall).fill(1))
-blocks[5][5]=0
-console.log(blocks)
+
 let ballPosition = [canvasHeight/1.3,canvasWidth/2]
-let ballVelocity = [-Math.SQRT2/2,Math.SQRT2/2]
+let ballVelocity = [1,1]
 let ballRadius = 5
-ctx.fillRect(0,0,canvasWidth,canvasHeight)
+
+const paddleWidth = canvasWidth/4
+const paddleHeight = 10
+let paddlePos = (canvasWidth/2)-(paddleWidth/2)
 
 function drawBlocks() {
     let doin = false
@@ -118,11 +123,16 @@ function drawBall() {
     ctx.arc(ballPosition[0],ballPosition[1],ballRadius,0,Math.PI*2)
     ctx.fill()
 }
+function drawPaddle() {
+    ctx.fillStyle="green"
+    ctx.fillRect(paddlePos,canvasHeight-paddleHeight,paddleWidth,paddleHeight)
+}
 function main() {
     ctx.clearRect(0,0,canvasWidth,canvasHeight)
     drawBlocks()
     updateBall()
     drawBall()
+    drawPaddle()
 
     requestAnimationFrame(main)
 }
