@@ -10,13 +10,17 @@ let blocksWide = 10
 let blocksTall = 10
 let blocksWidth = (canvasWidth - leftOffset - rightOffset)/blocksWide
 let blocksHeight = (canvasHeight - topOffset - bottomOffset)/blocksTall
-let blocks = new Array(blocksWide).fill(new Array(blocksTall).fill(1))
+let blocks = new Array(blocksWide).fill().map(x => new Array(blocksTall).fill(1))
+blocks[5][5]=0
+console.log(blocks)
 let ballPosition = [canvasHeight/1.3,canvasWidth/2]
 let ballVelocity = [-Math.SQRT2/2,Math.SQRT2/2]
-let ballRadius = 2
+let ballRadius = 5
 ctx.fillRect(0,0,canvasWidth,canvasHeight)
 
 function drawBlocks() {
+    let doin = false
+    let colide = false
     for (let x = 0; x < blocksWide; x++) {
         const row = blocks[x];
         for (let y = 0; y < blocksTall; y++) {
@@ -28,13 +32,22 @@ function drawBlocks() {
                 ctx.lineWidth=1
                 ctx.fillRect(blockPosition[0],blockPosition[1],blocksWidth,blocksHeight)
                 ctx.strokeRect(blockPosition[0],blockPosition[1],blocksWidth,blocksHeight)
-                if (testColision(blockPosition)==true) {
+                let result = testColision(blockPosition)
+                if (result[0]==true) {
                     //console.log("does this really happen 10 times?")
+                    colide=true
                     blocks[x][y]=0
+                    if (result[1]) {
+                        doin=true
+                    }
                 }
             }
             
         }
+    }
+    if (colide&!doin){
+        ballVelocity[0]*=-1
+        ballVelocity[1]*=-1
     }
 }
 function testColision(pos) {
@@ -72,14 +85,11 @@ function testColision(pos) {
         if (!(up||down)) {
             ballVelocity[0]*=-1
             donee=true
-        } if (!donee) {
-            ballVelocity[0]*=-1
-            ballVelocity[1]*=-1
         }
-        return true
+        return [true,donee]
         
     }
-    return false
+    return [false,false]
 }
 function updateBall() {
     ballPosition[0]+=ballVelocity[0]
