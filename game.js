@@ -15,8 +15,8 @@ let blocksHeight = (canvasHeight - topOffset - bottomOffset)/blocksTall
 
 let blocks = new Array(blocksWide).fill().map(x => new Array(blocksTall).fill(1))
 
-let ballPosition = [canvasHeight/1.3,canvasWidth/2]
-let ballVelocity = [1,1]
+let ballPosition = [canvasWidth/2,canvasHeight/1.3]
+let ballVelocity = [1,-1]
 let ballRadius = 5
 
 const paddleWidth = canvasWidth/4
@@ -139,7 +139,7 @@ function updateBall() {
     if (ballPosition[1]+ballRadius>canvasHeight-paddleHeight&&(ballPosition[0]<paddlePos+paddleWidth&&ballPosition[0]>paddlePos)) {
         ballVelocity[1]*=-1
         let magnatude = Math.sqrt(ballVelocity[0]*ballVelocity[0]+ballVelocity[1]*ballVelocity[1])
-        let newVel = [ballVelocity[0]-(ballPosition[0]-(paddlePos+(paddleWidth/2)))/100,ballVelocity[1]]
+        let newVel = [ballVelocity[0]+(ballPosition[0]-(paddlePos+(paddleWidth/2)))/20,ballVelocity[1]]
         let newMagnatude = Math.sqrt(newVel[0]*newVel[0]+newVel[1]*newVel[1])
         ballVelocity[0]=(newVel[0]*magnatude)/newMagnatude
         ballVelocity[1]=(newVel[1]*magnatude)/newMagnatude
