@@ -3,6 +3,11 @@ p {
     font-style: italic;
     font-family: cursive;
     font-size: larger;
-    text-align: center;
+    text-align:left;
     
+}
+canvas {
+    border-style:double;
+    border-radius: 6px;
+    border-color: black;
 }
