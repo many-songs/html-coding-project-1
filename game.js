@@ -15,7 +15,7 @@ let blocksHeight = (canvasHeight - topOffset - bottomOffset)/blocksTall
 
 let blocks = new Array(blocksWide).fill().map(x => new Array(blocksTall).fill(1))
 
-let ballPosition = [canvasWidth/2,canvasHeight/1.3]
+let ballPosition = [canvasWidth/2,canvasHeight-(bottomOffset/2)]
 let ballVelocity = [1,-1]
 let ballRadius = 5
 
