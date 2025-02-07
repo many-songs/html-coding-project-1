@@ -2,6 +2,9 @@ let canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d");
 let  canvasHeight = canvas.getAttribute("height")
 let canvasWidth = canvas.getAttribute("width")
+let canvasX = document.getElementById("canvasSizex")
+let canvasY = document.getElementById("canvasSizey")
+let blockNum = document.getElementById("block num")
 
 let topOffset = 20
 let leftOffset = 30
@@ -25,6 +28,7 @@ let paddlePos = (canvasWidth/2)-(paddleWidth/2)
 
 let moveRight = false
 let moveLeft = false
+
 
 document.addEventListener("keydown",(e) =>keyIsPressed(e))
 document.addEventListener("keyup",(e)=>keyIsReleased(e))
@@ -174,4 +178,4 @@ function main() {
 
     requestAnimationFrame(main)
 }
-main()
+
